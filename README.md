@@ -25,17 +25,21 @@ Amaci; kuleyi secmek, secmeyi iptal etmek, insa etmek ve kuleyi silmek.
       11.GetTowerToUpgrade; sectigimiz kuleyi return ediyor.
       12.DeleteTower; buradaki kuleyi yokedip yerine bayrak koyuyor ve ui i kapatiyor.
 ---
+
 BuildNode Script
 
-  Bulundugu Yer; haritadaki tum bayraklar.
-  Amaci; Ustune gelince renk degismesini saglamak, insa icin gerekli konum bilgisi yollamak.
-   - BuildManager ile iletisime gecmesi icin buildmanager instance olusturduk.
-   - Fonksiyonlar;
-      1. Start; renk degisimi icin render yapisini atamak, renk bilgilerini atama, buildManager instance olusturmak.
-      2. GetBuildPosition; bayragin konum bilgisini return eder.
-      3. OnMouseDown; tiklandiginda buildManagerdaki SelectBuildNode ile bu bayragin secilmesini saglamak.
-      4. OnMouseEnter; mouse ustune gelince renk soyle olsun.
-      5. OnMouseExit; mouse ustunden cikinca renk soyle olsun.
+Bulundugu Yer; haritadaki tum bayraklar.
+Amaci; Ustune gelince renk degismesini saglamak, insa icin gerekli konum bilgisi yollamak.
+- BuildManager ile iletisime gecmesi icin buildmanager instance olusturduk.
+- Fonksiyonlar;
+
+      ---
+
+      1.Start; renk degisimi icin render yapisini atamak, renk bilgilerini atama, buildManager instance olusturmak.
+      2.GetBuildPosition; bayragin konum bilgisini return eder.
+      3.OnMouseDown; tiklandiginda buildManagerdaki SelectBuildNode ile bu bayragin secilmesini saglamak.
+      4.OnMouseEnter; mouse ustune gelince renk soyle olsun.
+      5.OnMouseExit; mouse ustunden cikinca renk soyle olsun.
 ---
 3. BuildNodeUI Script
   Bulundugu Yer; hiyerarsideki BuildNodeUI objesi.
