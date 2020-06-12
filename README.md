@@ -1,6 +1,8 @@
 # 2DTowerDefenseGame
 Game project for ODTU
 
+#####################
+
 Script Bilgileri
 
 #####################
@@ -44,9 +46,9 @@ Script Bilgileri
 
 3.BuildNodeUI Script
 
-      Bulundugu Yer; hiyerarsideki BuildNodeUI objesi.
-      Amaci; ui in pozisyonunu gereken yere tasimak, gerektiginde ekranda gozukmesini ve yok olmasini saglamak.
-- ui objesi olusturup inspectordan atamasini yaptik. ui i hedef gosterecegimiz BuildNode degiskeni olusturduk.
+      Bulundugu Yer; Hiyerarsideki BuildNodeUI objesi.
+      Amaci; UI'in pozisyonunu gereken yere tasimak, gerektiginde ekranda gozukmesini ve yok olmasini saglamak.
+- ui objesi olusturup inspectordan atamasini yaptik. ui i hedef gosterecegimiz BuildNode degiskeni olusturduk. TowerNodeUI'in tamamen aynisi.
 - Fonksiyonlar; 
       
       1.SetTarget(BuildNode _target); parametre girilen buildNode un konumunu kendi konumu yapar. BuildNode'daki GetBuildPosition i kullandik.
@@ -137,9 +139,104 @@ Script Bilgileri
 
 10.Shop Script
 
-      Bulundugu Yer;
-      Amaci;
-- asd
-- Fonksiyon;
+      Bulundugu Yer; Hiyerarsideki bos GameManager objesi.
+      Amaci; UI buttonlari iliskilendirilip, buildManager'daki fonksiyonlari kullanarak kulenin secilmesi, insa edilmesi, upgrade edilmesi, silinmesi fonksiyonlarini calistirmak.
+- BuildManager ile iliskilendirmek icin instance olusturduk. Kullanicinin scriptlerle olan aksiyonlarini burada gerceklestirdik. Kulenin secili olup olmadigini bilmek icin ise bir flag tuttuk.
+- Fonksiyonlar;
       
-      1.
+      1.Start; buildManager instance i olusturmak.
+      2.SelectArrowTower; Arrow toweri secip seciliKule objesine bunu atamak. Yani buildManagerdaki SelectTowerToBuild fonksiyonunu cagirip icine arrowTower parametresini sokmak.
+      3.SelectStoneTower; Ayni seyi stoneTower a yapmak.
+      4.SelectMagicTower; Ayni seyi magicTower a yapmak.
+      5.BuildSelectedTower; isTowerSelected flagi ni kullanarak eger kule seciliyse ve yeteri para varsa kule insa etmesini saglamak ve goldu dusurmek. buildManager'daki BuildTower'in icine GetTowerToBuild'den aldigimiz parametreyi girerek bu islemi yaptik.
+      6.UpgradeSelectedTower; Eger gold yeterliyse ve kule level 1 ise bununla ilgili, level 2 ise bununla ilgili update i yapmak ve goldu dusurmek. buildManager'daki UpdateTowerToLevel2 ve UpdateTowerToLevel3 fonksiyonlarini kullanarak yaptik.
+      7.DeleteSelectedTower; Secili kuleyi yoketmek ve gold u buna gore artirmak.
+
+---
+
+11.Tower Script
+
+      Bulundugu Yer; Tum kuleler.
+      Amaci; Kulelerin bilgilerini tutmak, atis noktasinin hedefe dogru kitlenmesini saglamak, ates etmek.     
+- BuildManager ile iliskilendirmek icin instance olusturduk. Hedef konumu icin target Transform olusturduk. Kulenin etki alani, atacagi projectile obje degiskeni, atesi burdan edecegimiz icin ates hizi, hedefi belirtmek icin 'Enemy' tagi tanimi, ates edilecek noktanin ve hedefe kitlenirken hareket edecek partToRotate objelerinin tanimlari yapildi.
+- Fonksiyonlar;
+            
+            1.Start; InvokeRepeating ile oyun acilinca belirli saniye araliklarinda surekli calisan UpdateTarget fonksiyonunu calistirmak.
+            2.UpdateTarget; Dusmanlardan olusan bir GameObject arrayi yaparak, bu dusmanlar icerisinde kuleye mesafesi en kisa olani bularak targeti o olarak belirler. Sinirimiz disindaki targetlere kitlenmez.
+            3.Update; Her saniye target olup olmadigini kontrol etmek icin buraya yazildi. Dusman olup olmadigini takip etmek ve eger varsa bu dusmana LockOnTarget ile kitlenmesini ve Shoot ile ates etmesini saglamak. 
+            4.LockOnTarget; Hedef ile kule arasindaki mesafeyi hesaplayarak partToRotate'e gerekli rotasyonu yaptirmak.
+            5.Shoot; Bir projectile objesi olusturmak, bu objeyi belirlenen hizda ve mesafede hedefe dogru yollamak. Hedefi bulunca da projectile i yok etmek. Bunu Projectile'daki SeekTarget fonksiyonunu burada cagirarak yaptik.
+            6.OnDrawGizmosSelected; Tower'in rangeini gorebilmek icin, belirlenmis range mesafesinde cizgi cizer.
+            
+---
+
+12.TowerBlueprint Script
+
+      Bulundugu Yer; Hicbir objeye atanmamistir. Sadece diger scriptler icinde kullanilmistir.
+      Amaci; Bu script MonoBehaviour'dan ayrilmis sadece kuleler icin bir altyapi olusturmak icin scriptlerde kullanilmistir.
+- 3 Levelli bir kule bilgilerini tutmasi icin 3 adet GameObject prefab degiskeni, kule adi, insa etme tutari, satma tutari, upgrade edilip edilmedigi ile ilgili flagler bulunmaktadir.
+- Buradaki bilgileri Unity'de Inspector'dan da degistirebilmemiz icin scriptin en basina '[System.Serializable]' eklenmistir.
+- Wave Script mantigi ile ayni hazirlanmistir.
+
+---
+
+13.TowerNode
+      
+      Bulundugu Yer; Tum kuleler.
+      Amaci; Kulelerin ustune gelince renklerinin degismesini saglamak, tiklaninca UI acilip kapanmasini saglamak, kulenin bulundugu konum bilgilerini iletmek. Yani bayrak ile ayni script.
+- BuildManager ile iliskilendirmek icin instance olusturduk. Render componenti ve renk degiskenlerini olusturduk.
+- Fonksiyonlar;
+
+      1.Start; Render component ve renk atamalarini gerceklestirmek, rahat kullanim icin buildManager instance atamasini yapmak.
+      2.GetTowerPosition; Kulenin bilgilerini konum olarak (Vector2 ya da Vector3) return etmek.
+      3.OnMouseDown; Tiklandiginda buildManager'dan SelectTowerNode(this) fonksiyonunu cagirarak parametre olarak suanki kuleyi girmek.
+      4.OnMouseEnter; Mouse uzerine geldigince renk degismek.
+      5.OnMMouseExit; Mouse uzerinden cikinca renk degismek.
+      
+---
+
+14.TowerNodeUI Script
+
+      Bulundugu Yer; Hiyerarsideki TowerNodeUI objesi.
+      Amaci; UI'in pozisyonunu gereken yere tasimak, gerektiginde ekranda gozukmesini ve yok olmasini saglamak.
+- UI objesi olusturup inspectordan atamasini yaptik. UI'i hedef gosterecegimiz TowerNode degiskenini olusturduk. BuildNodeUI'in tamamen aynisi.
+- Fonksiyonlar; 
+
+      1.SetTarget(TowerNode _target); parametre girilen towerNode un konumunu kendi konumu yapar. TowerNode'daki GetTowerPosition i kullandik.
+      2.HideUI; ui i gizler.
+      3.ShowUI; ui i gosterir.
+      
+---
+
+15.Wave Script
+
+      Bulundugu Yer; Hicbir objeye atanmamistir. Sadece WaveSpawner'dan dusman dalgasi olusturmak icin script icinde kullanilmistir.
+      Amaci; Bu script MonoBehaviour'dan ayrilmis sadece dusman dalgalari icin bir altyapi olusturmak icin scriptlerde kullanilmistir. 
+- Bir dusman GameObject degiskeni olusturulup Unity Inspector'dan atamasi yapilmistir. Bu dusmanin sayisi ile cikis sikligi degiskenleri olusturulmustur. Yani burada hangi obje dusmandan kac adet ve ne siklikla olacagi belirlenmesi ve WaveSpawner scriptinde kullanilarak dusman dalgasini olusturmak amaclanmistir.
+- Buradaki bilgileri Unity'de Inspector'dan da degistirebilmemiz icin scriptin en basina '[System.Serializable]' eklenmistir. 
+- TurretBlueprint mantigi ile ayni hazirlanmistir.
+
+---
+
+16.WaveSpawner Script
+
+      Bulundugu Yer; Hiyerarsideki bos GameManager objesi.
+      Amaci; Wave Scriot'indeki dusman gruplarindan bir array olusturarak sira ile bu arraydeki dusman dalgalarini belirli araliklarla olusturmak, bunu yaparken de sahnedeki canli dusman sayisini tutmak.
+- Heryerden erisilebilmesi icin public static bir EnemiesAlive degiskeni olusturuldu. Wave scriptinden bir waves arrayi olusturuldu. Bu dusman dalgalarinin spawn olacaklari hedef nokta, sonraki dalga icin gerekli sure, sayac ve dalga numarasi tutan degiskenler olusturuldu.
+- GameManager'i kullanabilmek icin bir GameManager GameObject degiskeni olusturup Unity Inspector'dan atamasini yaptik.
+- Fonksiyonlar;
+
+      1.Update; Sayacimiz 0 ya da daha kucukse StartCoroutine kullanarak SpawnWave fonksiyonu ile dalgalari olusturmak. Sayaci yenilemek, her saniye sayaci 1 azaltmak. Dusman sayisini, sayaci surekli kontrol etmek ve bunlara gore surekli dusman dalgasi olusturabilmek icin bu kisma yazildi. 
+      2.SpawnWave; Her calistiginda PlayerStats'daki Round sayisini 1 artirmak, Wave scriptinden hizlica bir obje olusturup bu scriptte tanimladigimiz waves[] arrayine atmak. Dongu ile SpawnEnemy fonksiyonunu kullanarak bu dalgayi belirlenen dusman sayisi kadar olusturmak. Her seferinde waveNumber i ve spawn olan dusman sayisina gore EnemiesAlive degiskenlerini duuzenlemek. Coroutine icerisinde kullanilabilmesi icin IEnumerator type i ile olusturulmustur.
+      3.SpawnEnemy(GameObject _enemy); Belirlenen spawn noktasinda girilen parametredeki dusmani olusturmak.
+      
+---
+
+17.Waypoints Script
+
+      Bulundugu Yer; Dusmanin takip etmesini istedigimiz yola 'Waypoint' isminde bir bos obje konmus ve bunlarin hepsi 'Waypoints' ismindeki parent altina toplanmistir. Bulundugu yer parent olan Waypoints objesidir.
+      Amaci; Bu script altinda olusturulan her bir noktanin konumunu array halinde kullanarak dusmanlari hareket ettirmek.
+- Her yerden erisilebilmesi icin points isminde public static Transform degiskeni olusturulmustur. Tum noktalarin konumlarini sirasi ile bu arraye atacagiz.
+- Fonksiyonlar;
+     
+      1.Awake; points arrayinin buyuklugunu Waypoints'in child sayisi kadar ayarlamak. Bir dongu ile childlarin Transform'larini tek tek points[] arrayine atmak. Oyun baslamadan once build oldugu anda bu atamanin yapilmasi icin Awake fonksiyonu kullanilmistir.
