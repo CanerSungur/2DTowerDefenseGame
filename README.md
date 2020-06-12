@@ -9,19 +9,21 @@ BuildManager Script
   Amaci; kuleyi secmek, secmeyi iptal etmek, insa etmek ve kuleyi silmek.
    - Her yerden kolayca erisilebilip deger tutsun diye static yapildi. Baska yerlerden erisilebilsin diye kendi icinde scripti bir 'instance' isimli degiskene atayip bunu diger scriptlerde cagirarak BuildManager'dan rahatca islem yapabilecegiz.
    - Fonksiyonlar;
-      1. BuildTower(TowerBlueprint _blueprint); buradaki bayragi yokedip, parametre olarak aldigi blueprinti insa eder. 
-      2. SelectBuildNode(BuildNode _buildNode); tiklanan bayragi seciyor ve ui i aciyor.
-      3. DeselectBuildNode; secimi iptal ediyor ve ui i kapatiyor.
-      4. SelectTowerToBuild(TowerBlueprint _tower); parametre girilen kuleyi seciyor. 
-      5. GetTowerToBuild; sectigimiz kuleyi return ediyor.
+      1.BuildTower(TowerBlueprint _blueprint); buradaki bayragi yokedip, parametre olarak aldigi blueprinti insa eder. 
+      2.SelectBuildNode(BuildNode _buildNode); tiklanan bayragi seciyor ve ui i aciyor.
+      3.DeselectBuildNode; secimi iptal ediyor ve ui i kapatiyor.
+      4.SelectTowerToBuild(TowerBlueprint _tower); parametre girilen kuleyi seciyor. 
+      5.GetTowerToBuild; sectigimiz kuleyi return ediyor.
+      
       ---
-      6. UpgradeTowerToLevel2; buradaki kuleyi yokedip, level 2 kuleyi insa ediyor.
-      7. UpgradeTowerToLevel3; buradaki kuleyi yokedip, level 3 kuleyi insa ediyor.
-      8. SelectTowerNode; tiklanan kuleyi seciyor ve ui i aciyor.
-      9. DeselectTowerNode; secimi iptal ediyor ve ui i kapatiyor.
-      10. SelectTowerToUpgrade(TowerBlueprint _towerBlueprint); parametre girilen kuleyi seciyor.
-      11. GetTowerToUpgrade; sectigimiz kuleyi return ediyor.
-      12. DeleteTower; buradaki kuleyi yokedip yerine bayrak koyuyor ve ui i kapatiyor.
+      
+      6.UpgradeTowerToLevel2; buradaki kuleyi yokedip, level 2 kuleyi insa ediyor.
+      7.UpgradeTowerToLevel3; buradaki kuleyi yokedip, level 3 kuleyi insa ediyor.
+      8.SelectTowerNode; tiklanan kuleyi seciyor ve ui i aciyor.
+      9.DeselectTowerNode; secimi iptal ediyor ve ui i kapatiyor.
+      10.SelectTowerToUpgrade(TowerBlueprint _towerBlueprint); parametre girilen kuleyi seciyor.
+      11.GetTowerToUpgrade; sectigimiz kuleyi return ediyor.
+      12.DeleteTower; buradaki kuleyi yokedip yerine bayrak koyuyor ve ui i kapatiyor.
 ---
 BuildNode Script
 
