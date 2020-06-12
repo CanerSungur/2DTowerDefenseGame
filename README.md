@@ -1,7 +1,8 @@
 # 2DTowerDefenseGame
 Game project for ODTU
 #####################
-1. BuildManager Script
+BuildManager Script
+
   Bulundugu Yer; Hiyerarsideki bos GamaManager objesi.
   Amaci; kuleyi secmek, secmeyi iptal etmek, insa etmek ve kuleyi silmek.
    - Her yerden kolayca erisilebilip deger tutsun diye static yapildi. Baska yerlerden erisilebilsin diye kendi icinde scripti bir 'instance' isimli degiskene atayip bunu diger scriptlerde cagirarak BuildManager'dan rahatca islem yapabilecegiz.
@@ -20,7 +21,8 @@ Game project for ODTU
       11. GetTowerToUpgrade; sectigimiz kuleyi return ediyor.
       12. DeleteTower; buradaki kuleyi yokedip yerine bayrak koyuyor ve ui i kapatiyor.
 ---
-2. BuildNode Script
+BuildNode Script
+
   Bulundugu Yer; haritadaki tum bayraklar.
   Amaci; Ustune gelince renk degismesini saglamak, insa icin gerekli konum bilgisi yollamak.
    - BuildManager ile iletisime gecmesi icin buildmanager instance olusturduk.
@@ -40,7 +42,8 @@ Game project for ODTU
       2. HideUI; ui i gizler.
       3. ShowUI; ui i gosterir.
 ---
-4. ButtonHoverColorChanger Script
+ButtonHoverColorChanger Script
+
   Bulundugu Yer; tiklanabilecek butonlarin hepsi
   Amaci; butonlarin ustune gelindiginde ve tiklandiginda renk degismesi.
    - render componenti ve renklerin degiskenleri atandi.
@@ -49,14 +52,16 @@ Game project for ODTU
       2. OnMouseEnter; mouse ustune gelince su renk olsun.
       3. OnMoouseExit; mouse ustunden gidince su renk olsun.
 ---
-5. CameraController Script
+CameraController Script
+
   Bulundugu Yer; kamera
   Amaci; klavye ya da mouse ile kameranin hareket etmesi ve belirli bir alanda sinirlandirilmasi.
    - pan hizi, kenar kalinligi, min-max x ve y degerleri atamalari yapildi.
    - Fonksiyonlar;
       1. Update; anlik takip edilmesi gerektiginden update icine yazildi. Ilk once min ve max degerleri belirli degerlerle sinirli tutuldu, kamera hareket ettirme degerleri de bu degiskenlerle uygulandi.
 ---
-6. Enemy Script
+Enemy Script
+
   Bulundugu Yer; tum dusmanlar
   Amaci; dusmani hedef noktalara dogru yurutmek, damage almasini, olmesini, yolun sonuna gelip yok olmasini saglamak.
    - dusman hizi, cani, degeri, hedef noktasi, olup olmedigi degerleri ve yurutebilmek icin wavepointIndex degerlerini olusturduk.
@@ -68,7 +73,8 @@ Game project for ODTU
       5. GetNextWaypoint
       6. EndPath
 ---
-7. GameManager Script
+GameManager Script
+
   Bulundugu Yer; Hiyerarsideki bos GameManager objesi
   Amacı; Oyun bitisi, baslangici gibi hangi ekran gelecegi ve genelde oyuna ne olacagina karar vermek.
    - Her yerde degismeden tutulsu ve erisilebilsin diye GameIsOver bool yaptik. Gerekli ekran ui lari da burada tanimlanacak.
@@ -77,7 +83,8 @@ Game project for ODTU
       2. Update; Oyunun bitip bitmedigini surekli kontrol edip canimiz sifirlaninca GameIsOver i true yapmak.
       3. EndGame; Oyun bittiginde neler yapmak istiyorsak buraya girecegiz.
 ---
-8. PlayerStats Script
+PlayerStats Script
+
   Bulundugu Yer; Hiyerarsideki bos GameManager objesi
   Amaci; Kullanicinin bilgilerini ve ilgili bazi UI'lari tutmak.
    - Gold, lives, kacinci round oldugu, kalan lives ve gold icin UI Text degiskenleri olusturuldu.
@@ -85,7 +92,8 @@ Game project for ODTU
     1. Start; Gold, lives ve round baslangic atamalarini yapmak.
     2. Update; Surekli kontrol ederek guncel tutmak icin ilgili text atamasini buraya yaptik.
 ---
-9. Projectile Script
+Projectile Script
+
   Bulundugu Yer; Oyundaki projectile objelerin hepsi
   Amaci; Projectile objelerin hedefi bulmasi, vurmasi, damage vermesi.
    - Hedef belirlemek amaciyla konum tutan target isimli Transform yapildi. Projectile in hizi, damage, alan damage vuruyorsa ilgili degerler, slow yapiyorsa ilgili degerler tanimlandi. 
