@@ -8,8 +8,8 @@ BuildManager Script
   Bulundugu Yer; Hiyerarsideki bos GamaManager objesi.
   Amaci; kuleyi secmek, secmeyi iptal etmek, insa etmek ve kuleyi silmek.
    - Her yerden kolayca erisilebilip deger tutsun diye static yapildi. Baska yerlerden erisilebilsin diye kendi icinde scripti bir 'instance' isimli degiskene atayip bunu diger scriptlerde cagirarak BuildManager'dan rahatca islem yapabilecegiz.
-   - Fonksiyonlar;
-      1.BuildTower(TowerBlueprint _blueprint); buradaki bayragi yokedip, parametre olarak aldigi blueprinti insa eder. 
+   - Fonksiyonlar;\n
+      1.BuildTower(TowerBlueprint _blueprint); buradaki bayragi yokedip, parametre olarak aldigi blueprinti insa eder.\n 
       2.SelectBuildNode(BuildNode _buildNode); tiklanan bayragi seciyor ve ui i aciyor.
       3.DeselectBuildNode; secimi iptal ediyor ve ui i kapatiyor.
       4.SelectTowerToBuild(TowerBlueprint _tower); parametre girilen kuleyi seciyor. 
