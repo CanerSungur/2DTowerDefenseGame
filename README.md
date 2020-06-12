@@ -5,9 +5,8 @@ Game project for ODTU
 
 1.BuildManager Script
 
-!Bulundugu Yer; Hiyerarsideki bos GamaManager objesi.
-
-!Amaci; kuleyi secmek, secmeyi iptal etmek, insa etmek ve kuleyi silmek.
+      Bulundugu Yer; Hiyerarsideki bos GamaManager objesi.
+      Amaci; kuleyi secmek, secmeyi iptal etmek, insa etmek ve kuleyi silmek.
 - Her yerden kolayca erisilebilip deger tutsun diye static yapildi. Baska yerlerden erisilebilsin diye kendi icinde scripti bir 'instance' isimli degiskene atayip bunu diger scriptlerde cagirarak BuildManager'dan rahatca islem yapabilecegiz.
 - Fonksiyonlar;
       
@@ -30,9 +29,8 @@ Game project for ODTU
 
 2.BuildNode Script
 
-Bulundugu Yer; haritadaki tum bayraklar.
-
-Amaci; Ustune gelince renk degismesini saglamak, insa icin gerekli konum bilgisi yollamak.
+      Bulundugu Yer; haritadaki tum bayraklar.
+      Amaci; Ustune gelince renk degismesini saglamak, insa icin gerekli konum bilgisi yollamak.
 - BuildManager ile iletisime gecmesi icin buildmanager instance olusturduk.
 - Fonksiyonlar;
 
@@ -48,9 +46,8 @@ Amaci; Ustune gelince renk degismesini saglamak, insa icin gerekli konum bilgisi
 
 3.BuildNodeUI Script
 
-Bulundugu Yer; hiyerarsideki BuildNodeUI objesi.
-
-Amaci; ui in pozisyonunu gereken yere tasimak, gerektiginde ekranda gozukmesini ve yok olmasini saglamak.
+      Bulundugu Yer; hiyerarsideki BuildNodeUI objesi.
+      Amaci; ui in pozisyonunu gereken yere tasimak, gerektiginde ekranda gozukmesini ve yok olmasini saglamak.
 - ui objesi olusturup inspectordan atamasini yaptik. ui i hedef gosterecegimiz BuildNode degiskeni olusturduk.
 - Fonksiyonlar; 
 
@@ -64,9 +61,8 @@ Amaci; ui in pozisyonunu gereken yere tasimak, gerektiginde ekranda gozukmesini 
 
 4.ButtonHoverColorChanger Script
 
-Bulundugu Yer; tiklanabilecek butonlarin hepsi
-
-Amaci; butonlarin ustune gelindiginde ve tiklandiginda renk degismesi.
+      Bulundugu Yer; tiklanabilecek butonlarin hepsi
+      Amaci; butonlarin ustune gelindiginde ve tiklandiginda renk degismesi.
 - render componenti ve renklerin degiskenleri atandi.
 - Fonksiyonlar;
      
@@ -80,9 +76,8 @@ Amaci; butonlarin ustune gelindiginde ve tiklandiginda renk degismesi.
 
 5.CameraController Script
 
-Bulundugu Yer; Kamera
-
-Amaci; klavye ya da mouse ile kameranin hareket etmesi ve belirli bir alanda sinirlandirilmasi.
+      Bulundugu Yer; Kamera
+      Amaci; klavye ya da mouse ile kameranin hareket etmesi ve belirli bir alanda sinirlandirilmasi.
 - pan hizi, kenar kalinligi, min-max x ve y degerleri atamalari yapildi.
 - Fonksiyonlar;
 
@@ -94,9 +89,8 @@ Amaci; klavye ya da mouse ile kameranin hareket etmesi ve belirli bir alanda sin
 
 6.Enemy Script
 
-Bulundugu Yer; Tum Dusmanlar
-
-Amaci; dusmani hedef noktalara dogru yurutmek, damage almasini, olmesini, yolun sonuna gelip yok olmasini saglamak.
+      Bulundugu Yer; Tum Dusmanlar
+      Amaci; dusmani hedef noktalara dogru yurutmek, damage almasini, olmesini, yolun sonuna gelip yok olmasini saglamak.
 - dusman hizi, cani, degeri, hedef noktasi, olup olmedigi degerleri ve yurutebilmek icin wavepointIndex degerlerini olusturduk.
 - Fonksiyonlar;
 
@@ -113,9 +107,8 @@ Amaci; dusmani hedef noktalara dogru yurutmek, damage almasini, olmesini, yolun 
 
 7.GameManager Script
 
-Bulundugu Yer; Hiyerarsideki bos GameManager objesi
-
-Amacı; Oyun bitisi, baslangici gibi hangi ekran gelecegi ve genelde oyuna ne olacagina karar vermek.
+      Bulundugu Yer; Hiyerarsideki bos GameManager objesi
+      Amacı; Oyun bitisi, baslangici gibi hangi ekran gelecegi ve genelde oyuna ne olacagina karar vermek.
 - Her yerde degismeden tutulsu ve erisilebilsin diye GameIsOver bool yaptik. Gerekli ekran ui lari da burada tanimlanacak.
 - Fonksiyonlar;
 
@@ -129,9 +122,8 @@ Amacı; Oyun bitisi, baslangici gibi hangi ekran gelecegi ve genelde oyuna ne ol
 
 8.PlayerStats Script
 
-Bulundugu Yer; Hiyerarsideki bos GameManager objesi
-
-Amaci; Kullanicinin bilgilerini ve ilgili bazi UI'lari tutmak.
+      Bulundugu Yer; Hiyerarsideki bos GameManager objesi
+      Amaci; Kullanicinin bilgilerini ve ilgili bazi UI'lari tutmak.
 - Gold, lives, kacinci round oldugu, kalan lives ve gold icin UI Text degiskenleri olusturuldu.
 - Fonksiyonlar; 
       
@@ -144,9 +136,8 @@ Amaci; Kullanicinin bilgilerini ve ilgili bazi UI'lari tutmak.
 
 9.Projectile Script
 
-Bulundugu Yer; Oyundaki projectile objelerin hepsi
-
-Amaci; Projectile objelerin hedefi bulmasi, vurmasi, damage vermesi.
+      Bulundugu Yer; Oyundaki projectile objelerin hepsi
+      Amaci; Projectile objelerin hedefi bulmasi, vurmasi, damage vermesi.
 - Hedef belirlemek amaciyla konum tutan target isimli Transform yapildi. Projectile in hizi, damage, alan damage vuruyorsa ilgili degerler, slow yapiyorsa ilgili degerler tanimlandi. 
 - Fonksiyonlar; 
 
@@ -162,8 +153,8 @@ Amaci; Projectile objelerin hedefi bulmasi, vurmasi, damage vermesi.
 
 10.Shop Script
 
-Bulundugu Yer;
-Amaci;
+      Bulundugu Yer;
+      Amaci;
 - asd
 - Fonksiyon;
 
