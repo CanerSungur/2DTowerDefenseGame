@@ -3,7 +3,7 @@ Game project for ODTU
 
 #####################
 
-BuildManager Script
+1.BuildManager Script
 
 Bulundugu Yer; Hiyerarsideki bos GamaManager objesi.
 Amaci; kuleyi secmek, secmeyi iptal etmek, insa etmek ve kuleyi silmek.
@@ -24,9 +24,10 @@ Amaci; kuleyi secmek, secmeyi iptal etmek, insa etmek ve kuleyi silmek.
       10.SelectTowerToUpgrade(TowerBlueprint _towerBlueprint); parametre girilen kuleyi seciyor.
       11.GetTowerToUpgrade; sectigimiz kuleyi return ediyor.
       12.DeleteTower; buradaki kuleyi yokedip yerine bayrak koyuyor ve ui i kapatiyor.
+      
 ---
 
-BuildNode Script
+2.BuildNode Script
 
 Bulundugu Yer; haritadaki tum bayraklar.
 Amaci; Ustune gelince renk degismesini saglamak, insa icin gerekli konum bilgisi yollamak.
@@ -40,16 +41,24 @@ Amaci; Ustune gelince renk degismesini saglamak, insa icin gerekli konum bilgisi
       3.OnMouseDown; tiklandiginda buildManagerdaki SelectBuildNode ile bu bayragin secilmesini saglamak.
       4.OnMouseEnter; mouse ustune gelince renk soyle olsun.
       5.OnMouseExit; mouse ustunden cikinca renk soyle olsun.
+      
 ---
-3. BuildNodeUI Script
-  Bulundugu Yer; hiyerarsideki BuildNodeUI objesi.
-  Amaci; ui in pozisyonunu gereken yere tasimak, gerektiginde ekranda gozukmesini ve yok olmasini saglamak.
-   - ui objesi olusturup inspectordan atamasini yaptik. ui i hedef gosterecegimiz BuildNode degiskeni olusturduk.
-   - Fonksiyonlar; 
-      1. SetTarget(BuildNode _target); parametre girilen buildNode un konumunu kendi konumu yapar. BuildNode'daki GetBuildPosition i kullandik.
-      2. HideUI; ui i gizler.
-      3. ShowUI; ui i gosterir.
+
+3.BuildNodeUI Script
+
+Bulundugu Yer; hiyerarsideki BuildNodeUI objesi.
+Amaci; ui in pozisyonunu gereken yere tasimak, gerektiginde ekranda gozukmesini ve yok olmasini saglamak.
+- ui objesi olusturup inspectordan atamasini yaptik. ui i hedef gosterecegimiz BuildNode degiskeni olusturduk.
+- Fonksiyonlar; 
+
+      ---
+      
+      1.SetTarget(BuildNode _target); parametre girilen buildNode un konumunu kendi konumu yapar. BuildNode'daki GetBuildPosition i kullandik.
+      2.HideUI; ui i gizler.
+      3.ShowUI; ui i gosterir.
+      
 ---
+
 ButtonHoverColorChanger Script
 
   Bulundugu Yer; tiklanabilecek butonlarin hepsi
