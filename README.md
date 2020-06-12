@@ -1,6 +1,8 @@
 # 2DTowerDefenseGame
 Game project for ODTU
+
 #####################
+
 BuildManager Script
 
   Bulundugu Yer; Hiyerarsideki bos GamaManager objesi.
