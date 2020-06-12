@@ -59,64 +59,105 @@ Amaci; ui in pozisyonunu gereken yere tasimak, gerektiginde ekranda gozukmesini 
       
 ---
 
-ButtonHoverColorChanger Script
+4.ButtonHoverColorChanger Script
 
-  Bulundugu Yer; tiklanabilecek butonlarin hepsi
-  Amaci; butonlarin ustune gelindiginde ve tiklandiginda renk degismesi.
-   - render componenti ve renklerin degiskenleri atandi.
-   - Fonksiyonlar;
-      1. Start; render componenti ve renklerin atamalarini yapar.
-      2. OnMouseEnter; mouse ustune gelince su renk olsun.
-      3. OnMoouseExit; mouse ustunden gidince su renk olsun.
+Bulundugu Yer; tiklanabilecek butonlarin hepsi
+Amaci; butonlarin ustune gelindiginde ve tiklandiginda renk degismesi.
+- render componenti ve renklerin degiskenleri atandi.
+- Fonksiyonlar;
+     
+      ---
+      
+      1.Start; render componenti ve renklerin atamalarini yapar.
+      2.OnMouseEnter; mouse ustune gelince su renk olsun.
+      3.OnMoouseExit; mouse ustunden gidince su renk olsun.
+      
 ---
-CameraController Script
 
-  Bulundugu Yer; kamera
-  Amaci; klavye ya da mouse ile kameranin hareket etmesi ve belirli bir alanda sinirlandirilmasi.
-   - pan hizi, kenar kalinligi, min-max x ve y degerleri atamalari yapildi.
-   - Fonksiyonlar;
-      1. Update; anlik takip edilmesi gerektiginden update icine yazildi. Ilk once min ve max degerleri belirli degerlerle sinirli tutuldu, kamera hareket ettirme degerleri de bu degiskenlerle uygulandi.
+5.CameraController Script
+
+Bulundugu Yer; kamera
+Amaci; klavye ya da mouse ile kameranin hareket etmesi ve belirli bir alanda sinirlandirilmasi.
+- pan hizi, kenar kalinligi, min-max x ve y degerleri atamalari yapildi.
+- Fonksiyonlar;
+
+      ---
+      
+      1.Update; anlik takip edilmesi gerektiginden update icine yazildi. Ilk once min ve max degerleri belirli degerlerle sinirli tutuldu, kamera hareket ettirme degerleri de bu degiskenlerle uygulandi.
+      
 ---
-Enemy Script
 
-  Bulundugu Yer; tum dusmanlar
-  Amaci; dusmani hedef noktalara dogru yurutmek, damage almasini, olmesini, yolun sonuna gelip yok olmasini saglamak.
-   - dusman hizi, cani, degeri, hedef noktasi, olup olmedigi degerleri ve yurutebilmek icin wavepointIndex degerlerini olusturduk.
-   - Fonksiyonlar;
-      1. Start
-      2. TakeDamage(float damage)
-      3. Die
-      4. Update
-      5. GetNextWaypoint
-      6. EndPath
+6.Enemy Script
+
+Bulundugu Yer; tum dusmanlar
+Amaci; dusmani hedef noktalara dogru yurutmek, damage almasini, olmesini, yolun sonuna gelip yok olmasini saglamak.
+- dusman hizi, cani, degeri, hedef noktasi, olup olmedigi degerleri ve yurutebilmek icin wavepointIndex degerlerini olusturduk.
+- Fonksiyonlar;
+
+      ---
+      
+      1.Start
+      2.TakeDamage(float damage)
+      3.Die
+      4.Update
+      5.GetNextWaypoint
+      6.EndPath
+      
 ---
-GameManager Script
 
-  Bulundugu Yer; Hiyerarsideki bos GameManager objesi
-  Amacı; Oyun bitisi, baslangici gibi hangi ekran gelecegi ve genelde oyuna ne olacagina karar vermek.
-   - Her yerde degismeden tutulsu ve erisilebilsin diye GameIsOver bool yaptik. Gerekli ekran ui lari da burada tanimlanacak.
-   - Fonksiyonlar;
-      1. Start; Yani oyun baslangicinda GameIsOver i false yapmak.
-      2. Update; Oyunun bitip bitmedigini surekli kontrol edip canimiz sifirlaninca GameIsOver i true yapmak.
-      3. EndGame; Oyun bittiginde neler yapmak istiyorsak buraya girecegiz.
+7.GameManager Script
+
+Bulundugu Yer; Hiyerarsideki bos GameManager objesi
+Amacı; Oyun bitisi, baslangici gibi hangi ekran gelecegi ve genelde oyuna ne olacagina karar vermek.
+- Her yerde degismeden tutulsu ve erisilebilsin diye GameIsOver bool yaptik. Gerekli ekran ui lari da burada tanimlanacak.
+- Fonksiyonlar;
+
+      ---
+      
+      1.Start; Yani oyun baslangicinda GameIsOver i false yapmak.
+      2.Update; Oyunun bitip bitmedigini surekli kontrol edip canimiz sifirlaninca GameIsOver i true yapmak.
+      3.EndGame; Oyun bittiginde neler yapmak istiyorsak buraya girecegiz.
+
 ---
-PlayerStats Script
 
-  Bulundugu Yer; Hiyerarsideki bos GameManager objesi
-  Amaci; Kullanicinin bilgilerini ve ilgili bazi UI'lari tutmak.
-   - Gold, lives, kacinci round oldugu, kalan lives ve gold icin UI Text degiskenleri olusturuldu.
-   - Fonksiyonlar; 
-    1. Start; Gold, lives ve round baslangic atamalarini yapmak.
-    2. Update; Surekli kontrol ederek guncel tutmak icin ilgili text atamasini buraya yaptik.
+8.PlayerStats Script
+
+Bulundugu Yer; Hiyerarsideki bos GameManager objesi
+Amaci; Kullanicinin bilgilerini ve ilgili bazi UI'lari tutmak.
+- Gold, lives, kacinci round oldugu, kalan lives ve gold icin UI Text degiskenleri olusturuldu.
+- Fonksiyonlar; 
+      
+      ---
+      
+      1.Start; Gold, lives ve round baslangic atamalarini yapmak.
+      2.Update; Surekli kontrol ederek guncel tutmak icin ilgili text atamasini buraya yaptik.
+      
 ---
-Projectile Script
 
-  Bulundugu Yer; Oyundaki projectile objelerin hepsi
-  Amaci; Projectile objelerin hedefi bulmasi, vurmasi, damage vermesi.
-   - Hedef belirlemek amaciyla konum tutan target isimli Transform yapildi. Projectile in hizi, damage, alan damage vuruyorsa ilgili degerler, slow yapiyorsa ilgili degerler tanimlandi. 
-   - Fonksiyonlar; 
-    1. SeekTarget(Transform target); Girilen parametredeki konum degerini bizim hedefimiz olarak atamak.
-    2. Update; Hedefi surekli takip etmek icin buraya yazildi. Projectile konumunu hedefin konumuna esitleyip objeyi oraya firlatmak.
-    3. HitTarget; Hedefe damage vermek ve projectile objesini yok etmek.
-    4. Damage(Transform enemy); Girilen parametredeki konumdaki dusmana damage vermek. Bunun icin fonksiyon icinde bir dusman objesi olusturup oraya eristik ve dusmanin TakeDammage fonksiyonu ile dusmana damage vermis olduk.
-    5. OnDrawGizmoSelected(); Bu sadece sahne ekraninda objenin girilen alan damage i etki alanini gostermeye yariyor.
+9.Projectile Script
+
+Bulundugu Yer; Oyundaki projectile objelerin hepsi
+Amaci; Projectile objelerin hedefi bulmasi, vurmasi, damage vermesi.
+- Hedef belirlemek amaciyla konum tutan target isimli Transform yapildi. Projectile in hizi, damage, alan damage vuruyorsa ilgili degerler, slow yapiyorsa ilgili degerler tanimlandi. 
+- Fonksiyonlar; 
+
+      ---
+      
+      1.SeekTarget(Transform target); Girilen parametredeki konum degerini bizim hedefimiz olarak atamak.
+      2.Update; Hedefi surekli takip etmek icin buraya yazildi. Projectile konumunu hedefin konumuna esitleyip objeyi oraya firlatmak.
+      3.HitTarget; Hedefe damage vermek ve projectile objesini yok etmek.
+      4.Damage(Transform enemy); Girilen parametredeki konumdaki dusmana damage vermek. Bunun icin fonksiyon icinde bir dusman objesi olusturup oraya eristik ve dusmanin TakeDammage fonksiyonu ile dusmana damage vermis olduk.
+      5.OnDrawGizmoSelected(); Bu sadece sahne ekraninda objenin girilen alan damage i etki alanini gostermeye yariyor.
+
+---
+
+10.Shop Script
+
+Bulundugu Yer;
+Amaci;
+- asd
+- Fonksiyon;
+
+      ---
+      
+      1.
