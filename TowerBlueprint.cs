@@ -19,14 +19,4 @@ public class TowerBlueprint
 
 	public bool isUpgraded;
 	public bool isFullyUpgraded;
-
-	public int GetSellAmount()
-	{
-		return costToBuild / 2;
-	}
-	
-	public int GetUpgradeAmount()
-	{
-		return costToBuild + costToBuild * 1 / 2;
-	}
 }
