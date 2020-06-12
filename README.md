@@ -5,9 +5,9 @@ Game project for ODTU
 
 1.BuildManager Script
 
-Bulundugu Yer; Hiyerarsideki bos GamaManager objesi.
+!Bulundugu Yer; Hiyerarsideki bos GamaManager objesi.
 
-Amaci; kuleyi secmek, secmeyi iptal etmek, insa etmek ve kuleyi silmek.
+!Amaci; kuleyi secmek, secmeyi iptal etmek, insa etmek ve kuleyi silmek.
 - Her yerden kolayca erisilebilip deger tutsun diye static yapildi. Baska yerlerden erisilebilsin diye kendi icinde scripti bir 'instance' isimli degiskene atayip bunu diger scriptlerde cagirarak BuildManager'dan rahatca islem yapabilecegiz.
 - Fonksiyonlar;
       
