@@ -1,6 +1,8 @@
 # 2DTowerDefenseGame
 Game project for ODTU
 
+Script Bilgileri
+
 #####################
 
 1.BuildManager Script
