@@ -9,63 +9,237 @@ Blueprint Scripts
 
 1.EnemyBlueprint Script
 
-      Bulundugu Yer; Taslak olarak baz alınan script olduğudan, MonoBehaviour'a inherit değildir. Haliyle hiçbir objeye bağlı değildir.
-      Amaci; Wave oluştururken içine gireceğimiz düşmanların bilgilerinden bir şablon oluşturmak.
+      Bulunduğu Yer; Taslak olarak baz alınan script olduğudan, MonoBehaviour'a inherit değildir. Haliyle hiçbir objeye bağlı değildir.
+      Amacı; Wave oluştururken içine gireceğimiz düşmanların bilgilerinden bir şablon oluşturmak.
 - Hiçbir objeye bağlanmadığı için Inspector'dan erişerek data girilebilmesi için scriptin en başına [System.Serializable] eklenmiştir. Enemy'nin şablon halinde datasını tutmaktadır.
 - enemyName ve enemyPrefab değişkenleri bulunmaktadır.
 - Fonksiyon bulunmamaktadır.
       
 2.TowerBlueprint Script
 
-      Bulundugu Yer; Taslak olarak baz alınan script olduğudan, MonoBehaviour'a inherit değildir. Haliyle hiçbir objeye bağlı değildir.
-      Amaci; Build edilecek kulelerin genel bilgilerinden bir şablon oluşturmak.
-- Hiçbir objeye bağlanmadığı için Inspector'dan erişerek data girilebilmesi için scriptin en başına [System.Serializable] eklenmiştir. Enemy'nin şablon halinde datasını tutmaktadır.
+      Bulunduğu Yer; Taslak olarak baz alınan script olduğudan, MonoBehaviour'a inherit değildir. Haliyle hiçbir objeye bağlı değildir.
+      Amacı; Build edilecek kulelerin genel bilgilerinden bir şablon oluşturmak.
+- Hiçbir objeye bağlanmadığı için Inspector'dan erişerek data girilebilmesi için scriptin en başına [System.Serializable] eklenmiştir. Tower'ın şablon halinde datasını tutmaktadır.
 - Fonksiyonlar;
       
-      1.GetCostToBuild(TowerBlueprint blueprint); buradaki bayragi yokedip, parametre olarak aldigi blueprinti insa eder.
-      2.SelectBuildNode(BuildNode buildNode); tiklanan bayragi seciyor ve ui i aciyor.
-      3.DeselectBuildNode; secimi iptal ediyor ve ui i kapatiyor.
-      4.SelectTowerToBuild(TowerBlueprint tower); parametre girilen kuleyi seciyor. 
-      5.GetTowerToBuild; sectigimiz kuleyi return ediyor.
-      6.UpgradeTowerToLevel2; buradaki kuleyi yokedip, level 2 kuleyi insa ediyor.   
+      1.GetCostToBuild(int _costBoost); Parametre alacağı kule inşa ücretini düşüren özelliği ekleyerek kulenin inşası için gerekli değeri verecek.
+      2.GetCostForLevel2(); 1 numaradaki fonksiyonu içinde çalıştırarak bu değerin belirli yüzde fazlasını return edecek.
+      3.GetCostForLevel3();1 numaradaki fonksiyonu içinde çalıştırarak bu değerin belirli yüzde fazlasını return edecek.
+      4.GetSellValueForLevel1(); 1 numaralı fonksiyondaki değerin yüzde 50'sini return edecek.
+      5.GetSellValueForLevel2(); 2 numaralı fonksiyondaki değerin yüzde 50'sini return edecek.
+      6.GetSellValueForLevel3(); 3 numaralı fonksiyondaki değerin yüzde 50'sini return edecek.
+
+3.Wave
+      
+      Bulunduğu Yer; Taslak olarak baz alınan script olduğudan, MonoBehaviour'a inherit değildir. Haliyle hiçbir objeye bağlı değildir.
+      Amacı; Spawn edilecek dalgaların(wave) içeriğini belirleyecek boss ve düşman arrayi tutarak wavelerin altyapısını oluşturmak.
+- Hiçbir objeye bağlanmadığı için Inspector'dan erişerek data girilebilmesi için scriptin en başına [System.Serializable] eklenmiştir. Oluşturulacak Wave'lerin içeriğinde bulunacak değişkenleri ve gerekli fonksiyonlarını tutmaktadır.
+- EnemyBlueprint type'ında boss ve düşman arrayleri tanımlanmıştır. Düşman adedini ve çıkış hızını belirten değişkenler de tanımlanmıştır. 
+- Fonksiyonlar;
+      
+      1.GetRandomEnemyCount(); Kullanıcının bulunduğu Round'a göre random düşman sayısı aralığı değeri return eder.
+      2.GetRandomEnemyIndex(); Toplamda oyunda bosslar hariç 6 düşman bulunmaktadır. Bu nedenle 1 ile 6 arasında random bir sayı return eder.
+
+#####################
+
+Build Mechanic Scripts
+
+#####################
 
 1.BuildManager Script
 
-      Bulundugu Yer; Hiyerarsideki bos GamaManager objesi.
-      Amaci; kuleyi secmek, secmeyi iptal etmek, insa etmek ve kuleyi silmek.
-- Her yerden kolayca erisilebilip deger tutsun diye static yapildi. Baska yerlerden erisilebilsin diye kendi icinde scripti bir 'instance' isimli degiskene atayip bunu diger scriptlerde cagirarak BuildManager'dan rahatca islem yapabilecegiz.
+      Bulunduğu Yer; Hiyerarşideki boş GamaManager objesi.
+      Amacı; Kule seçmek, seçilen kuleyi return etmek, kule inşa edilecek Node'ları seçmek ve seçimi iptal etmek.
+- Her yerden kolayca erişilebilip değer tutsun diye static yapildi. Baska yerlerden erişilebilsin diye kendi içinde scripti bir 'instance' isimli değişkene atayip bunu diğer scriptlerde çağırarak BuildManager'dan rahatça işlem yapabilecegiz.
 - Fonksiyonlar;
       
-      1.BuildTower(TowerBlueprint blueprint); buradaki bayragi yokedip, parametre olarak aldigi blueprinti insa eder.
-      2.SelectBuildNode(BuildNode buildNode); tiklanan bayragi seciyor ve ui i aciyor.
-      3.DeselectBuildNode; secimi iptal ediyor ve ui i kapatiyor.
-      4.SelectTowerToBuild(TowerBlueprint tower); parametre girilen kuleyi seciyor. 
-      5.GetTowerToBuild; sectigimiz kuleyi return ediyor.
-      6.UpgradeTowerToLevel2; buradaki kuleyi yokedip, level 2 kuleyi insa ediyor.
-      7.UpgradeTowerToLevel3; buradaki kuleyi yokedip, level 3 kuleyi insa ediyor.
-      8.SelectTowerNode; tiklanan kuleyi seciyor ve ui i aciyor.
-      9.DeselectTowerNode; secimi iptal ediyor ve ui i kapatiyor.
-      10.SelectTowerToUpgrade(TowerBlueprint _towerBlueprint); parametre girilen kuleyi seciyor.
-      11.GetTowerToUpgrade; sectigimiz kuleyi return ediyor.
-      12.DeleteTower; buradaki kuleyi yokedip yerine bayrak koyuyor ve ui i kapatiyor.
-      
----
+      1.SelectNode(Node node); Parametre girilen Node'u seçer. Bu fonksiyon Node'un OnClick fonksiyonunda kullanılacak.
+      2.DeselectNode(); Zaten seçili olan Node'a bir kez daha tıklandığında seçimi iptal eder.
+      3.SelectTowerToBuild(TowerBlueprint tower); Parametre girilen kuleyi inşa etmek üzere seçer. Bu fonksiyon Shop'ta kule seçiminde çağrılacak.
+      4.GetTowerToBuild(); İnşa etmek üzere seçilen kuleyi return eder. Bu fonksiyon Node'da kule inşa edilirken çağrılacak.
+      5.Awake(); Bu scriptin bir instance ını oluşturur.
 
-2.BuildNode Script
+2.Node Script
 
-      Bulundugu Yer; haritadaki tum bayraklar.
-      Amaci; Ustune gelince renk degismesini saglamak, insa icin gerekli konum bilgisi yollamak.
-- BuildManager ile iletisime gecmesi icin buildmanager instance olusturduk.
+      Bulunduğu Yer; Haritadaki tüm inşa noktaları yani Node'lar.
+      Amacı; UI'da seçilen kuleyi üstüne tıklandığında aynı noktada inşa etmek. Kuleleri upgrade etmek veya satmak.
+- BuildManager ile iletişime geçebilmesi için BuildManager instance'ı oluşturuluyor. Üstüne geldiğinde renk değiştirebilmesi için Renderer componenti kullanılarak gerekli değişkenler kuruluyor. Upgrade olup olmadığını tutmak için bool değerler oluşturuluyor.
 - Fonksiyonlar;
-
-      1.Start; renk degisimi icin render yapisini atamak, renk bilgilerini atama, buildManager instance olusturmak.
-      2.GetBuildPosition; bayragin konum bilgisini return eder.
-      3.OnMouseDown; tiklandiginda buildManagerdaki SelectBuildNode ile bu bayragin secilmesini saglamak.
-      4.OnMouseEnter; mouse ustune gelince renk soyle olsun.
-      5.OnMouseExit; mouse ustunden cikinca renk soyle olsun.
       
----
+      1.Start(); Renderer componentını oluşturmak, başlangıç rengini atamak ve BuildManager instance ını oluşturmak.
+      2.GetBuildPosition(); Bulunduğu pozisyonu return eder. Bu fonksiyon BuildTower fonksiyonunda kullanılacak.
+      3.OnMouseDown(); Mouse tıklandığı zaman gerekli işlemler yapılacak. Seçili değilse seçmek, Gold yetiyor mu bakmak, Seçili tower varsa BuildTower'ı çalıştırmak.
+      4.BuildTower(TowerBlueprint blueprint); Parametre aldığı blueprintten, Node'un bulunduğu pozisyonda bir kule inşa eder. Gold olup olmadığını kontrol eder.
+      5.UpgradeTower(); Kule hiç upgrade edilmemişse 2. seviyeye, bir kez upgrade edilmişse 3. seviyeye çıkartır. Eski towerı yok edip yenisini instantiate eder.
+      6.SellTower(); Mevcut kuleyi yok edip yerine Node instantiate eder. Gerekli goldu geri verir.
+      7.OnMouseEnter(); Mouse objenin üstüne geldiğinde gerekli renk değişikliği sağlar.
+      8.OnMouseExit(); Mouse objenin üstünden çıktığında gerekli renk değişikliği sağlar.
+      
+3.Shop Script
 
+      Bulunduğu Yer; Hiyerarşideki Shop isimli Canvas.
+      Amacı; UI buttonlari ilişkilendirip, buildManager'daki fonksiyonları kullanarak inşa edilecek kulenin seçilmesini sağlamak.
+- BuildManager ile iletişime geçebilmesi için BuildManager instance'ı oluşturuluyor. UI'da bulunan kulelerden birisine tıklandığında bu kuleyi inşa edilecek kule olarak seçmek.
+- Fonksiyonlar;
+      
+      1.Start(); BuildManager instance ı oluşturmak.
+      2.SelectArrowTower(); BuildManager'daki SelectTowerToBuild'e Arrow Tower'ın blueprintini sokarak inşa edilecek kuleyi seçmek.
+      3.SelectStoneTower(); BuildManager'daki SelectTowerToBuild'e Stone Tower'ın blueprintini sokarak inşa edilecek kuleyi seçmek.
+      4.SelectMagicTower(); BuildManager'daki SelectTowerToBuild'e Magic Tower'ın blueprintini sokarak inşa edilecek kuleyi seçmek.
+
+#####################
+
+Player Mechanic Scripts
+
+#####################
+
+1.LevelUp Script
+
+      Bulunduğu Yer; Hiyerarşideki boş GamaManager objesi.
+      Amacı; Kullanıcının experience puanlarını kontrol edip gerekli puana erişince level atlamasını sağlamak.
+- Fonksiyonlar;
+      
+      1.Update(); Sürekli olarak kontrol sağlamak için Exp fonksiyonunu burada çalıştırdık.
+      2.RankUp(); Kullanıcının levelini ve attribute puanını arttırır. Mevcut experience puanını sıfırlayarak yeni seviye için gerekli puanı hesaplar.
+      3.Exp(); Oyuncunun experience puanı, gerekli experience puanına erişirse RankUp fonksiyonunu çalıştıracak. Bu fonksiyon da Update fonksiyonunda çağrılıp sürekli kontrol sağlanacak.
+
+2.PlayerStats Script
+
+      Bulunduğu Yer; Hiyerarşideki boş GamaManager objesi.
+      Amacı; Kullanıcının oyunu açınca datasını load etmek, oyunu kapatınca save etmek, istediğinde silmesini sağlamak. Kullanıcının seviye, experience miktarı, attribute puanları, verdiği stat puanları, altın ve round sayısı gibi bilgilerini tutmak. Attribute puanlarını kullanmasını sağlamak.
+- Save/Load/Delete işlemlerini yapabilmek için oluşturduğumuz PlayerData'yı çağırıp, bunlarla ilgili işlemleri en başta yaptık. Daha sonra kullanıcı bilgilerini tutacağımız değişkenleri static bir şekilde tanımladık. Kullanıcının kazandığı puanları harcamasını sağlayacak fonksiyonları buraya yazdık.
+- Fonksiyonlar;
+      
+      1.OnEnable(); Oyuna başladığında önceki dataları load ederek başlamasını sağlamak.
+      2.OnDisable(); Oyundan çıktığımızda en sonki dataları kaydetmek.
+      3.DeleteProgress(); Tüm oyuncu bilgilerini tamamen silmek. 
+      4.Start(); Altın, round sayısı gibi static olan değerlerin gerekli atamalarını yapmak.
+      5.UseAttributePoints(); Puan varsa bunu bir azaltmak, yoksa hata vermek. Bu fonksiyonu aşağıdaki fonksiyonlarda çağıracağız.
+      6.AddDecreaseTowerCostPerk(); UseAttributePoints fonksiyonunu çağırıp eğer başarılı ise gerekli stat pointi harcayarak o özelliğin puanını arttırır. Daha sonra UI buttona eklenmesi için başka yerde çağrılacak.
+      7.AddIncreaseFireRatePerk(); UseAttributePoints fonksiyonunu çağırıp eğer başarılı ise gerekli stat pointi harcayarak o özelliğin puanını arttırır. Daha sonra UI buttona eklenmesi için başka yerde çağrılacak.
+      8.AddIncreaseProjectileDamagePerk(); UseAttributePoints fonksiyonunu çağırıp eğer başarılı ise gerekli stat pointi harcayarak o özelliğin puanını arttırır. Daha sonra UI buttona eklenmesi için başka yerde çağrılacak.
+
+#####################
+
+Menu Scripts
+
+#####################
+
+1.GameOver Script
+
+      Bulunduğu Yer; Hiyerarşideki GameOver Canvas.
+      Amacı; Oyun sonlandığında aktif olup oyunu bir kez daha açmak ya da çıkmak.
+- Ekran geçişleri için SceneFader objesi eklendi.
+- Fonksiyonlar;
+      
+      1.Retry(); Aktif sahneyi tekrar load eder.
+      2.Menu(); Menü sahnesini load eder.
+
+2.InfoMenu Script
+
+      Bulunduğu Yer; Hiyerarşideki boş GameManager objesi.
+      Amacı; UI'da info kutusuna basıldığında oyun oynanışıyla ilgili bilgi vermek ve belirli saniyelerle en alttaki info bölümünde random bilgi vermek.
+- Info penceresinde ve alttaki info boxta gösterilmesi için iki ayrı liste oluşturuldu. Bu UI'larla ilgil textlerin değişkenleri de oluşturuldu.
+- Fonksiyonlar;
+      
+      1.Start(); İki ayrı listenin elemanlarını eklemek.
+      2.Update(); Geri sayım yaparak ShowRandomInfo coroutine fonksiyonunu çalıştırmak.
+      3.IEnumerator ShowRandomInfo(); Atanan UI'a belirli aralıklarla listeden random bir stringi return etmek.
+      4.Toggle(); Oyunu durdurup tekrar başlatmak.
+      5.ShowNextText(); UI'daki ok işaretine atanacaktır. Ekrana basılmış listenin sonraki elemanına geçer.
+      6.ShowPreviousText(); UI'daki ok işaretine atanacaktır. Ekrana basılmış listenin bir önceki elemanına geçer.
+
+3.Menu Script
+
+      Bulunduğu Yer; MainMenu sahnesindeki boş MainMenu objesi.
+      Amacı; Oyunu başlatmak ya da oyundan çıkmak.
+- Ekran geçişleri için SceneFader objesi eklendi.
+- Fonksiyonlar;
+      
+      1.Play(); Oyunu açar.
+      2.Quit(); Oyundan çıkar.
+
+4.PauseMenu Script
+
+      Bulunduğu Yer; Hiyerarşideki PauseMenu Canvas.
+      Amacı; Ekrandaki tuşuna, ESC tuşuna ya da P tuşuna basıldığında oyunu durdurmak. Oyuncu isterse Menü'ye dönmek ya da oyunu baştan başlatmak.
+- Ekran geçişleri için SceneFader objesi eklendi.
+- Fonksiyonlar;
+      
+      1.Update(); Sürekli olarak kontrol ederek ESC ya da P tuşuna basıldığında Toggle fonksiyonunu çalıştırmak.
+      2.Toggle(); Oyunu durdurup tekrar başlatmak.
+      3.Retry(); Aktif sahneyi tekrar load eder.
+      4.Menu(); Menü sahnesini load eder.
+
+5.RoundsSurvived Script
+
+      Bulunduğu Yer; Hiyerarşideki GameOver Canvas içerisindeki RoundsSurvived UI'ı.
+      Amacı; Oyun sonlandığında ekrana gelecek olan UI'a animasyon şeklinde hayatta kalınan Round sayısını vermek.
+- Fonksiyonlar;
+      
+      1.OnEnable(); Bu kod aktif olduğunda çalışacak olan AnimateText'i içine girdik.
+      2.IEnumerator AnimateText(); 0'dan başlayarak hayatta kalınan rounda kadar animasyon şeklinde tek tek yazdıracak.
+
+6.SceneFader Script
+
+      Bulunduğu Yer; SceneFader game objesi.
+      Amacı; Sahne geçişlerinde ekranın yavaşça kararıp tekrar yavaşça aydınlanmasını sağlamak.
+- Siyah bir panel bulunan boş bir oyun objesini animasyon mantığı kullanarak yavaşça görünür ve yavaşça görünmez yapmak suretiyle sahne geçişi yapmak amaçlanır. Bunun için bir Img değişkeni ve AnimationCurve değişkeni tanımlandı. Bu sayede giderek hızlanacak şekilde animasyon yapabileceğiz.
+- Fonksiyonlar;
+      
+      1.Start(); Başlancıta FadeIn courotine ini çalıştırmak.
+      2.IEnumerator FadeIn(); Siyah resmi giderek alphasını düşürerek görünmez yapmak.
+      3.IEnumerator FadeOut(string scene); Görünmeyen siyah resmin alphasını açarak giderek görünür yapmak. Daha sonra parametre girilen sahneyi açmak.
+      4.FadeTo(string scene); Parametre girilen sahneye doğru FadeOut fonksiyonunu coroutine haline kullanarak geçişi yapmak.
+    
+7.StatChanger Script
+
+      Bulunduğu Yer; MainMenu sahnesindeki boş MainMenu objesi.
+      Amacı; Diğer objelerde tanımlanan stat puanlarını UI'a gömülen buttonlar ile çalıştırmak.
+- Fonksiyonlarını kullanabilmek için PlayerStats objesi oluşturuldu. Gerekli Text alanları oluşturuldu ve atamaları yapıldı.
+- Fonksiyonlar;
+      
+      1.Update(); Stat değişikliklerini sürekli kontrol ederek gerekli text alanlarını gerekli değerlerle doldurmak.
+      2.ChangeCost(); PlayerStats'daki AddDecreaseTowerCostPerk fonksiyonunu çalıştırır.
+      2.ChangeFireRate(); PlayerStats'daki AddIncreaseFireRatePerk fonksiyonunu çalıştırır.
+      2.ChangeProjectileDamage(); PlayerStats'daki AddIncreaseProjectileDamagePerk fonksiyonunu çalıştırır.
+
+#####################
+
+Load/Save/Delete Scripts
+
+#####################
+
+1.PlayerData Script
+
+      Bulunduğu Yer; MonoBehaviour ile ilişkili değildir. Hiçbir objeye bağlı değildir.
+      Amacı; Oyunda kaydedilmesi gereken değişkenlerin tanımlarını tutmak.
+- Kaydedilmesini istediğimiz tüm değişkenlerimiz ile aynı type ve isimde get; set; kullanarak birer değişken oluşturuldu.
+- Fonksiyon yok.
+     
+2.PlayerPersistence Script
+
+      Bulunduğu Yer; MonoBehaviour ile ilişkili değildir. Hiçbir objeye bağlı değildir.
+      Amacı; PlayerData objesini kullanarak gerekli dosya konumlarını oluşturup oralara bilgileri kaydetmek, oralardan bilgi çekmek veya silmek.
+- Fonksiyonlar;
+      
+      1.LoadData(); İstenilen değişkenleri istenilen konumlara ekleyerek oluşturulan PlayerData değşikenine bu değerleri atmak ve değer atılan bu datayı return etmek.
+      2.SaveData(PlayerStats playerStats); Mevcut PlayerStat değişkenlerinin bilgilerini gerekli yerlere kaydetmek.
+      3.DeleteAll(); Kayıtlı bilgilerin tümünü silmek ve sildikten sonra değişkenlerin başlangıç değerlerini tanımlamak.
+ 
+#####################
+
+Spawn Mechanic Scripts
+
+#####################
+
+1.PlayerData Script
+
+      Bulunduğu Yer; MonoBehaviour ile ilişkili değildir. Hiçbir objeye bağlı değildir.
+      Amacı; Oyunda kaydedilmesi gereken değişkenlerin tanımlarını tutmak.
+- Kaydedilmesini istediğimiz tüm değişkenlerimiz ile aynı type ve isimde get; set; kullanarak birer değişken oluşturuldu.
+- Fonksiyon yok.
+      
 3.BuildNodeUI Script
 
       Bulundugu Yer; Hiyerarsideki BuildNodeUI objesi.
@@ -132,15 +306,7 @@ Blueprint Scripts
 
 ---
 
-8.PlayerStats Script
 
-      Bulundugu Yer; Hiyerarsideki bos GameManager objesi
-      Amaci; Kullanicinin bilgilerini ve ilgili bazi UI'lari tutmak.
-- Gold, lives, kacinci round oldugu, kalan lives ve gold icin UI Text degiskenleri olusturuldu.
-- Fonksiyonlar; 
-      
-      1.Start; Gold, lives ve round baslangic atamalarini yapmak.
-      2.Update; Surekli kontrol ederek guncel tutmak icin ilgili text atamasini buraya yaptik.
       
 ---
 
@@ -159,20 +325,7 @@ Blueprint Scripts
 
 ---
 
-10.Shop Script
 
-      Bulundugu Yer; Hiyerarsideki bos GameManager objesi.
-      Amaci; UI buttonlari iliskilendirilip, buildManager'daki fonksiyonlari kullanarak kulenin secilmesi, insa edilmesi, upgrade edilmesi, silinmesi fonksiyonlarini calistirmak.
-- BuildManager ile iliskilendirmek icin instance olusturduk. Kullanicinin scriptlerle olan aksiyonlarini burada gerceklestirdik. Kulenin secili olup olmadigini bilmek icin ise bir flag tuttuk.
-- Fonksiyonlar;
-      
-      1.Start; buildManager instance i olusturmak.
-      2.SelectArrowTower; Arrow toweri secip seciliKule objesine bunu atamak. Yani buildManagerdaki SelectTowerToBuild fonksiyonunu cagirip icine arrowTower parametresini sokmak.
-      3.SelectStoneTower; Ayni seyi stoneTower a yapmak.
-      4.SelectMagicTower; Ayni seyi magicTower a yapmak.
-      5.BuildSelectedTower; isTowerSelected flagi ni kullanarak eger kule seciliyse ve yeteri para varsa kule insa etmesini saglamak ve goldu dusurmek. buildManager'daki BuildTower'in icine GetTowerToBuild'den aldigimiz parametreyi girerek bu islemi yaptik.
-      6.UpgradeSelectedTower; Eger gold yeterliyse ve kule level 1 ise bununla ilgili, level 2 ise bununla ilgili update i yapmak ve goldu dusurmek. buildManager'daki UpdateTowerToLevel2 ve UpdateTowerToLevel3 fonksiyonlarini kullanarak yaptik.
-      7.DeleteSelectedTower; Secili kuleyi yoketmek ve gold u buna gore artirmak.
 
 ---
 
