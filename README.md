@@ -3,9 +3,31 @@ Game project for ODTU
 
 #####################
 
-Script Bilgileri
+Blueprint Scripts
 
 #####################
+
+1.EnemyBlueprint Script
+
+      Bulundugu Yer; Taslak olarak baz alınan script olduğudan, MonoBehaviour'a inherit değildir. Haliyle hiçbir objeye bağlı değildir.
+      Amaci; Wave oluştururken içine gireceğimiz düşmanların bilgilerinden bir şablon oluşturmak.
+- Hiçbir objeye bağlanmadığı için Inspector'dan erişerek data girilebilmesi için scriptin en başına [System.Serializable] eklenmiştir. Enemy'nin şablon halinde datasını tutmaktadır.
+- enemyName ve enemyPrefab değişkenleri bulunmaktadır.
+- Fonksiyon bulunmamaktadır.
+      
+2.TowerBlueprint Script
+
+      Bulundugu Yer; Taslak olarak baz alınan script olduğudan, MonoBehaviour'a inherit değildir. Haliyle hiçbir objeye bağlı değildir.
+      Amaci; Build edilecek kulelerin genel bilgilerinden bir şablon oluşturmak.
+- Hiçbir objeye bağlanmadığı için Inspector'dan erişerek data girilebilmesi için scriptin en başına [System.Serializable] eklenmiştir. Enemy'nin şablon halinde datasını tutmaktadır.
+- Fonksiyonlar;
+      
+      1.GetCostToBuild(TowerBlueprint blueprint); buradaki bayragi yokedip, parametre olarak aldigi blueprinti insa eder.
+      2.SelectBuildNode(BuildNode buildNode); tiklanan bayragi seciyor ve ui i aciyor.
+      3.DeselectBuildNode; secimi iptal ediyor ve ui i kapatiyor.
+      4.SelectTowerToBuild(TowerBlueprint tower); parametre girilen kuleyi seciyor. 
+      5.GetTowerToBuild; sectigimiz kuleyi return ediyor.
+      6.UpgradeTowerToLevel2; buradaki kuleyi yokedip, level 2 kuleyi insa ediyor.   
 
 1.BuildManager Script
 
