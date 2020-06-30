@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerData
 {
 	//Kaydedecegimiz Data
-    public int PlayerLevel { get; set; }
+    	public int PlayerLevel { get; set; }
 	public float PlayerExperience { get; set; }
 	public float ExperienceRequired { get; set; }
 	public int AttributePoint { get; set; }
