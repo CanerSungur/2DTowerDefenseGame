@@ -233,185 +233,132 @@ Spawn Mechanic Scripts
 
 #####################
 
-1.PlayerData Script
+1.WaveSpawner Script
 
-      Bulunduğu Yer; MonoBehaviour ile ilişkili değildir. Hiçbir objeye bağlı değildir.
-      Amacı; Oyunda kaydedilmesi gereken değişkenlerin tanımlarını tutmak.
-- Kaydedilmesini istediğimiz tüm değişkenlerimiz ile aynı type ve isimde get; set; kullanarak birer değişken oluşturuldu.
-- Fonksiyon yok.
+      Bulunduğu Yer; Hiyerarşideki boş GameManager objesi.
+      Amacı; Başka scriptlerden edinilen random sayıları alarak random sayıda ve çeşitlilikte sonsuz düşmanlar spawn etmek.
+- Blueprintte oluşturduğumuz Wave typeında bir dalga oluşurup bunu inspectordan düzenliyoruz. Alınan random değerler kullanılarak haritadaki hayattaki düşman sayısı sıfırlandıkça çalışacak şekilde düşman çıkarıyoruz.
+- Fonksiyonlar;
+
+      1.Update(); Sürekli bir şekilde kontrol sağlayarak, hayatta düşman yoksa SpawnWave fonksiyonunu çalıştırıp sayacı saniyede bir azaltmak.
+      2.IEnumarator SpawnWave(); WaypointDecider'dan yol belirleyip diğer scriptten aldığı random değerleri kullanarak düşman dalgası oluşturmak. Belirli roundlara geldiğinde ilgili bossları spawn etmek. 
+      3.SpawnEnemy(EnemyBlueprint enemyBlueprint); Parametre aldığı düşman şablonunda bir düşman instantiate etmek. Bu fonksiyon SpawnEnemy fonksiyonu içinde çağrılacak.
       
-3.BuildNodeUI Script
+2.WaypointDecider Script
 
-      Bulundugu Yer; Hiyerarsideki BuildNodeUI objesi.
-      Amaci; UI'in pozisyonunu gereken yere tasimak, gerektiginde ekranda gozukmesini ve yok olmasini saglamak.
-- ui objesi olusturup inspectordan atamasini yaptik. ui i hedef gosterecegimiz BuildNode degiskeni olusturduk. TowerNodeUI'in tamamen aynisi.
-- Fonksiyonlar; 
-      
-      1.SetTarget(BuildNode _target); parametre girilen buildNode un konumunu kendi konumu yapar. BuildNode'daki GetBuildPosition i kullandik.
-      2.HideUI; ui i gizler.
-      3.ShowUI; ui i gosterir.
-      
----
-
-4.ButtonHoverColorChanger Script
-
-      Bulundugu Yer; tiklanabilecek butonlarin hepsi
-      Amaci; butonlarin ustune gelindiginde ve tiklandiginda renk degismesi.
-- render componenti ve renklerin degiskenleri atandi.
+      Bulunduğu Yer; Hiyerarşideki boş GameManager objesi.
+      Amacı; Haritada bulunan 3 oldan random bir tanesini seçmek. Belirli roundlarda kapalı olan yolları aktif etmek.
+- Üç adet waypoint objesi tanımlandı. WaveSpawner objesi oluşturuldu. Random bir yola karar verilip o waypoint aktif diğerleri pasife geçirilip spawn pointi aktif olan waypoint yapacağız.
 - Fonksiyonlar;
       
-      1.Start; render componenti ve renklerin atamalarini yapar.
-      2.OnMouseEnter; mouse ustune gelince su renk olsun.
-      3.OnMoouseExit; mouse ustunden gidince su renk olsun.
+      1.DecideWaypoint(); 1 ile 3 arasında random bir sayı üreterek o waypointi aktif eder ve yeni spawnPoint'i o nokta yapar. 5.Round'a gelindiğinde ikinci yolun, 10.Round'a gelindiğinde ise üçüncü yolun açılmasını sağlar.
       
----
+3.Waypoint Script
 
-5.CameraController Script
-
-      Bulundugu Yer; Kamera
-      Amaci; klavye ya da mouse ile kameranin hareket etmesi ve belirli bir alanda sinirlandirilmasi.
-- pan hizi, kenar kalinligi, min-max x ve y degerleri atamalari yapildi.
+      Bulunduğu Yer; Boş waypoint objelerinin parentı olan boş Waypoints objesi.
+      Amacı; Çocuğu olan tüm waypoint objelerini sırası ile bir arraye atmak suretiyle düşman için gidilecek bir rota belirlemek.
 - Fonksiyonlar;
       
-      1.Update; anlik takip edilmesi gerektiginden update icine yazildi. Ilk once min ve max degerleri belirli degerlerle sinirli tutuldu, kamera hareket ettirme degerleri de bu degiskenlerle uygulandi.
+      1.Awake(); Tüm childların konumunu tutacak Transform arrayine childların hepsinin bilgilerini atmak.
       
----
+#####################
 
-6.Enemy Script
+UI Scripts
 
-      Bulundugu Yer; Tum Dusmanlar
-      Amaci; dusmani hedef noktalara dogru yurutmek, damage almasini, olmesini, yolun sonuna gelip yok olmasini saglamak.
-- dusman hizi, cani, degeri, hedef noktasi, olup olmedigi degerleri ve yurutebilmek icin wavepointIndex degerlerini olusturduk.
+#####################
+
+1.NodeUI Script
+
+      Bulunduğu Yer; NodeUI objesi.
+      Amacı; Kuleyi upgrade edecek ve satacak fonksiyonları çağırmak. Gold miktarlarını göstermek.
+- Kulelerin üstüne tıklanınca gözüküp tekrar tıklanınca yok olan bir objedir. Node'a erişim için Node objesi oluşturulmuştur. Bu sayede Node'u hedef belirleyip nerede çıkıp çıkmayacağını halledebileceğiz.
+- Fonksiyonlar;
+
+      1.SetTarget(Node _target); Parametre aldığı Node'u hedef gösterip ilgili Gold değerlerini göstermek.
+      2.Hide(); UI'ı pasif yapmak.
+      3.Upgrade(); Node'daki UpgradeTower fonksiyonunu çağırmak. BuildManager'dan DeselectNode fonksiyonunu çağırarak bu Node'u deselect etmek.
+      4.Sell(); Node'daki SellTower fonksiyonunu çağırmak. BuildManager'dan DeselectNode fonksiyonunu çağırarak bu Node'u deselect etmek.
+
+2.ArrowTowerCostUI Script
+3.AttributePointsUI
+4.GoldUI
+5.LevelsUI
+6.LivesUI
+7.MagicTowerCostUI
+8.RoundsUI
+9.StoneTowerCostUI
+
+      Bulukları Yerler; İlgili text UI objeleri
+      Amaçları; İlgili değerleri ilgili Text konumlarında göstermek. 
+- Bu scriptlerin içerikleri aynıdır. Konumları hiyerarşideki ilgili UI Text alanlarıdır. Inspectordan da atamaları yapıldıktan sonra bilgiler bu alanlara bastırılmıştır.
 - Fonksiyonlar;
       
-      1.Start
-      2.TakeDamage(float damage)
-      3.Die
-      4.Update
-      5.GetNextWaypoint
-      6.EndPath
+      1.Update(); Sürekli kontrol sağlayarak gerekli bilgilerin ilgili Text alanına işlenmesini sağlamak.
       
----
+#####################
 
-7.GameManager Script
+Other Scripts
 
-      Bulundugu Yer; Hiyerarsideki bos GameManager objesi
-      Amacı; Oyun bitisi, baslangici gibi hangi ekran gelecegi ve genelde oyuna ne olacagina karar vermek.
-- Her yerde degismeden tutulsu ve erisilebilsin diye GameIsOver bool yaptik. Gerekli ekran ui lari da burada tanimlanacak.
+#####################
+
+1.CameraController Script
+
+      Bulunduğu Yer; Kamera.
+      Amacı; Klavye ya da mouse ile kameranın hareket etmesi ve belirli bir alanda sınırlandırılması.
+- Pan hızı, kenar kalınlığı, min-max x ve y değerlerinin atamaları yapıldı.
+- Fonksiyonlar;
+
+      1.Update(); Anlık takip edilmesi gerektiğinden update içine yazıldı. Min ve max değerlerin belirli değerlerle sınırlı tutulması. Kamera hareket ettirme değerlerinin de bu değerler uygulanması.
+ 
+2.Enemy Script
+
+      Bulunduğu Yer; Düşman Prefableri.
+      Amacı; Düşmanlarla ilgili tüm bilgileri tutmak. Damage almak, ölmek, yavaşlamak, waypoint doğrultusunda ilerlemek ve yolun sonuna gelince yok olmak, kullanıcıya hasar vermek.
+- Health, experience puanı, gold değeri, ölüp ölmediğini tutan bool değeri, hedefini belirten Transform değerlerinin tanımlamaları yapıldı.
+- Fonksiyonlar;
+
+      1.Start(); İlk hedefin Waypoints[0] olarak belirlenmesi, başlancıç değişken atamalarının yapılması.
+      2.TakeDamage(float damageAmount); Parametre kadar hp'ye zarar vermek. Hp barın seviyesini ayarlamak. Eğer düşmanın canı 0 ya da daha az olmuş ise Die fonksyionunu çağırmak.
+      3.Slow(float pct); Parametre kadar düşmanın hızını belirli bir oranda yavaşlatmak.
+      4.Die(); Bool değeri true ya çekmek. Kullanıcının goldunu arttırmak, haritadaki düşman sayısını azaltmak, experience puanını arttırmak ve düşman objesini yok etmek.
+      5.Update(); Sürekli olarak düşmanı kendi hızına göre diğer waypoint elemanına doğru ilerletmek. Bunun için GetNextWaypoint fonksiyonunu çağıracak.
+      6.GetNextWaypoint(); Eğer waypoint arrayindeki son elemana da gelmişse EndPath fonksiyonunu çalıştırır. Yoksa indexi arttırarak arraydeki sonraki elemana doğru gidilmesi sağlanır.
+      7.EndPath(); Kullanıcının canına zarar vermek, düşmanı yok etmek.
+      
+3.GameManager Script
+
+      Bulunduğu Yer; Hiyerarşideki boş GameManager objesi.
+      Amacı; Oyun bitişi, başlangıcı gibi hangi ekran geleceği ve genelde oyuna ne olacağına karar vermek.
+- Her yerde değişmeden tutulsun ve erişilebilsin diye static GameIsOver bool yaptık. Gerekli ekran UI'ları da burada tanımlandı.
 - Fonksiyonlar;
       
-      1.Start; Yani oyun baslangicinda GameIsOver i false yapmak.
-      2.Update; Oyunun bitip bitmedigini surekli kontrol edip canimiz sifirlaninca GameIsOver i true yapmak.
-      3.EndGame; Oyun bittiginde neler yapmak istiyorsak buraya girecegiz.
+      1.Start(); Oyun başlangıcında GameIsOver'ı false yapmak.
+      2.Update(); Oyunun bitip bitmediğini sürekli kontrol edip canımız sıfırlanınca GameIsOver'ı true yapmak.
+      3.EndGame(); GameIsOver'ı true yapmak ve GameOver UI'ını aktif etmek.
 
----
+4.Projectile Script
 
-
+      Bulunduğu Yer; Oyundaki projectile prefablerinin hepsi.
+      Amacı; Projectile objelerin hedefi bulması, vurması, damage vermesi, yavaşlatması.
+- Hedef belirlemek amacıyla konum tutan target isimli Transform yapıldı. Projectile'ın hızı, damage, alan damage vuruyorsa ilgili değerler, slow yapıyorsa ilgili değerler tanımlandı.
+- Fonksiyonlar;
       
----
+      1.SeekTarget(Transform target); Girilen parametredeki konum değerini bizim hedefimiz olarak atamak.
+      2.Update(); Hedefi sürekli takip etmek için buraya yazıldı. Projectile konumunu hedefin konumuna eşitleyip objeyi oraya fırlatmak.
+      3.HitTarget(); Hedefe damage vermek ve projectile objesini yok etmek.
+      4.Damage(Transform enemy); Girilen parametredeki konumdaki düşmana damage vermek. Bunun için fonksiyon içinde bir düşman objesi oluşturup oraya eriştik ve düşmanın TakeDamage fonksiyonu ile düşmana damage vermiş olduk.
+      5.OnDrawGizmoSelected(); Bu sadece sahne ekranında objenin girilen alan damage i etki alanını göstermeye yarıyor.
 
-9.Projectile Script
+5.Tower Script
 
-      Bulundugu Yer; Oyundaki projectile objelerin hepsi
-      Amaci; Projectile objelerin hedefi bulmasi, vurmasi, damage vermesi.
-- Hedef belirlemek amaciyla konum tutan target isimli Transform yapildi. Projectile in hizi, damage, alan damage vuruyorsa ilgili degerler, slow yapiyorsa ilgili degerler tanimlandi. 
-- Fonksiyonlar; 
-      
-      1.SeekTarget(Transform target); Girilen parametredeki konum degerini bizim hedefimiz olarak atamak.
-      2.Update; Hedefi surekli takip etmek icin buraya yazildi. Projectile konumunu hedefin konumuna esitleyip objeyi oraya firlatmak.
-      3.HitTarget; Hedefe damage vermek ve projectile objesini yok etmek.
-      4.Damage(Transform enemy); Girilen parametredeki konumdaki dusmana damage vermek. Bunun icin fonksiyon icinde bir dusman objesi olusturup oraya eristik ve dusmanin TakeDammage fonksiyonu ile dusmana damage vermis olduk.
-      5.OnDrawGizmoSelected(); Bu sadece sahne ekraninda objenin girilen alan damage i etki alanini gostermeye yariyor.
-
----
-
-
-
----
-
-11.Tower Script
-
-      Bulundugu Yer; Tum kuleler.
-      Amaci; Kulelerin bilgilerini tutmak, atis noktasinin hedefe dogru kitlenmesini saglamak, ates etmek.     
-- BuildManager ile iliskilendirmek icin instance olusturduk. Hedef konumu icin target Transform olusturduk. Kulenin etki alani, atacagi projectile obje degiskeni, atesi burdan edecegimiz icin ates hizi, hedefi belirtmek icin 'Enemy' tagi tanimi, ates edilecek noktanin ve hedefe kitlenirken hareket edecek partToRotate objelerinin tanimlari yapildi.
+      Bulunduğu Yer; Tüm kule prefableri.
+      Amacı; Kulelerin bilgilerini tutmak, atış noktasının hedefe doğru kitlenmesini sağlamak, ateş etmek.
+- Hedef konumu için target Transform oluşturduk. Kulenin etki alanı, atacağı projectile obje değişkeni, ateşi buradan edeceğimiz için ateş hızı, hedefi belirtmek için 'Enemy' tagi tanımı, ateş edilecek noktanın ve hedefe kitlenirken hareket edecek partToRotate objelerinin tanımları yapıldı.
 - Fonksiyonlar;
             
-            1.Start; InvokeRepeating ile oyun acilinca belirli saniye araliklarinda surekli calisan UpdateTarget fonksiyonunu calistirmak.
-            2.UpdateTarget; Dusmanlardan olusan bir GameObject arrayi yaparak, bu dusmanlar icerisinde kuleye mesafesi en kisa olani bularak targeti o olarak belirler. Sinirimiz disindaki targetlere kitlenmez.
-            3.Update; Her saniye target olup olmadigini kontrol etmek icin buraya yazildi. Dusman olup olmadigini takip etmek ve eger varsa bu dusmana LockOnTarget ile kitlenmesini ve Shoot ile ates etmesini saglamak. 
-            4.LockOnTarget; Hedef ile kule arasindaki mesafeyi hesaplayarak partToRotate'e gerekli rotasyonu yaptirmak.
-            5.Shoot; Bir projectile objesi olusturmak, bu objeyi belirlenen hizda ve mesafede hedefe dogru yollamak. Hedefi bulunca da projectile i yok etmek. Bunu Projectile'daki SeekTarget fonksiyonunu burada cagirarak yaptik.
-            6.OnDrawGizmosSelected; Tower'in rangeini gorebilmek icin, belirlenmis range mesafesinde cizgi cizer.
-            
----
-
-12.TowerBlueprint Script
-
-      Bulundugu Yer; Hicbir objeye atanmamistir. Sadece diger scriptler icinde kullanilmistir.
-      Amaci; Bu script MonoBehaviour'dan ayrilmis sadece kuleler icin bir altyapi olusturmak icin scriptlerde kullanilmistir.
-- 3 Levelli bir kule bilgilerini tutmasi icin 3 adet GameObject prefab degiskeni, kule adi, insa etme tutari, satma tutari, upgrade edilip edilmedigi ile ilgili flagler bulunmaktadir.
-- Buradaki bilgileri Unity'de Inspector'dan da degistirebilmemiz icin scriptin en basina '[System.Serializable]' eklenmistir.
-- Wave Script mantigi ile ayni hazirlanmistir.
-
----
-
-13.TowerNode
-      
-      Bulundugu Yer; Tum kuleler.
-      Amaci; Kulelerin ustune gelince renklerinin degismesini saglamak, tiklaninca UI acilip kapanmasini saglamak, kulenin bulundugu konum bilgilerini iletmek. Yani bayrak ile ayni script.
-- BuildManager ile iliskilendirmek icin instance olusturduk. Render componenti ve renk degiskenlerini olusturduk.
-- Fonksiyonlar;
-
-      1.Start; Render component ve renk atamalarini gerceklestirmek, rahat kullanim icin buildManager instance atamasini yapmak.
-      2.GetTowerPosition; Kulenin bilgilerini konum olarak (Vector2 ya da Vector3) return etmek.
-      3.OnMouseDown; Tiklandiginda buildManager'dan SelectTowerNode(this) fonksiyonunu cagirarak parametre olarak suanki kuleyi girmek.
-      4.OnMouseEnter; Mouse uzerine geldigince renk degismek.
-      5.OnMMouseExit; Mouse uzerinden cikinca renk degismek.
-      
----
-
-14.TowerNodeUI Script
-
-      Bulundugu Yer; Hiyerarsideki TowerNodeUI objesi.
-      Amaci; UI'in pozisyonunu gereken yere tasimak, gerektiginde ekranda gozukmesini ve yok olmasini saglamak.
-- UI objesi olusturup inspectordan atamasini yaptik. UI'i hedef gosterecegimiz TowerNode degiskenini olusturduk. BuildNodeUI'in tamamen aynisi.
-- Fonksiyonlar; 
-
-      1.SetTarget(TowerNode _target); parametre girilen towerNode un konumunu kendi konumu yapar. TowerNode'daki GetTowerPosition i kullandik.
-      2.HideUI; ui i gizler.
-      3.ShowUI; ui i gosterir.
-      
----
-
-15.Wave Script
-
-      Bulundugu Yer; Hicbir objeye atanmamistir. Sadece WaveSpawner'dan dusman dalgasi olusturmak icin script icinde kullanilmistir.
-      Amaci; Bu script MonoBehaviour'dan ayrilmis sadece dusman dalgalari icin bir altyapi olusturmak icin scriptlerde kullanilmistir. 
-- Bir dusman GameObject degiskeni olusturulup Unity Inspector'dan atamasi yapilmistir. Bu dusmanin sayisi ile cikis sikligi degiskenleri olusturulmustur. Yani burada hangi obje dusmandan kac adet ve ne siklikla olacagi belirlenmesi ve WaveSpawner scriptinde kullanilarak dusman dalgasini olusturmak amaclanmistir.
-- Buradaki bilgileri Unity'de Inspector'dan da degistirebilmemiz icin scriptin en basina '[System.Serializable]' eklenmistir. 
-- TurretBlueprint mantigi ile ayni hazirlanmistir.
-
----
-
-16.WaveSpawner Script
-
-      Bulundugu Yer; Hiyerarsideki bos GameManager objesi.
-      Amaci; Wave Scriot'indeki dusman gruplarindan bir array olusturarak sira ile bu arraydeki dusman dalgalarini belirli araliklarla olusturmak, bunu yaparken de sahnedeki canli dusman sayisini tutmak.
-- Heryerden erisilebilmesi icin public static bir EnemiesAlive degiskeni olusturuldu. Wave scriptinden bir waves arrayi olusturuldu. Bu dusman dalgalarinin spawn olacaklari hedef nokta, sonraki dalga icin gerekli sure, sayac ve dalga numarasi tutan degiskenler olusturuldu.
-- GameManager'i kullanabilmek icin bir GameManager GameObject degiskeni olusturup Unity Inspector'dan atamasini yaptik.
-- Fonksiyonlar;
-
-      1.Update; Sayacimiz 0 ya da daha kucukse StartCoroutine kullanarak SpawnWave fonksiyonu ile dalgalari olusturmak. Sayaci yenilemek, her saniye sayaci 1 azaltmak. Dusman sayisini, sayaci surekli kontrol etmek ve bunlara gore surekli dusman dalgasi olusturabilmek icin bu kisma yazildi. 
-      2.SpawnWave; Her calistiginda PlayerStats'daki Round sayisini 1 artirmak, Wave scriptinden hizlica bir obje olusturup bu scriptte tanimladigimiz waves[] arrayine atmak. Dongu ile SpawnEnemy fonksiyonunu kullanarak bu dalgayi belirlenen dusman sayisi kadar olusturmak. Her seferinde waveNumber i ve spawn olan dusman sayisina gore EnemiesAlive degiskenlerini duuzenlemek. Coroutine icerisinde kullanilabilmesi icin IEnumerator type i ile olusturulmustur.
-      3.SpawnEnemy(GameObject _enemy); Belirlenen spawn noktasinda girilen parametredeki dusmani olusturmak.
-      
----
-
-17.Waypoints Script
-
-      Bulundugu Yer; Dusmanin takip etmesini istedigimiz yola 'Waypoint' isminde bir bos obje konmus ve bunlarin hepsi 'Waypoints' ismindeki parent altina toplanmistir. Bulundugu yer parent olan Waypoints objesidir.
-      Amaci; Bu script altinda olusturulan her bir noktanin konumunu array halinde kullanarak dusmanlari hareket ettirmek.
-- Her yerden erisilebilmesi icin points isminde public static Transform degiskeni olusturulmustur. Tum noktalarin konumlarini sirasi ile bu arraye atacagiz.
-- Fonksiyonlar;
-     
-      1.Awake; points arrayinin buyuklugunu Waypoints'in child sayisi kadar ayarlamak. Bir dongu ile childlarin Transform'larini tek tek points[] arrayine atmak. Oyun baslamadan once build oldugu anda bu atamanin yapilmasi icin Awake fonksiyonu kullanilmistir.
+            1.Start(); InvokeRepeating ile oyun açılınca belirli saniye aralıklarında sürekli çalışan UpdateTarget fonksiyonunu çalıştırmak.
+            2.UpdateTarget(); Düşmanlardan oluşan bir GameObject arrayi yaparak, bu düşmanlar içerisinde kuleye mesafesi en kısa olanı bularak targeti o olarak belirler. Sınırımız dışındaki targetlere kitlenmez.
+            3.Update(); Her saniye target olup olmadığını kontrol etmek için buraya yazıldı. Düşman olup olmadığını takip etmek ve eğer varsa bu düşmana LockOnTarget ile kitlenmesini ve Shoot ile ateş etmesini sağlamak. 
+            4.LockOnTarget(); Hedef ile kule arasındaki mesafeyi hesaplayarak partToRotate'e gerekli rotasyonu yaptırmak.
+            5.Shoot(); Bir projectile objesi oluşturmak, bu objeyi belirlenen hızda ve mesafede hedefe doğru yollamak. Hedefi bulunca da projectile ı yok etmek. Bunu Projectile'daki SeekTarget fonksiyonunu burada cağırarak yaptık.
+            6.OnDrawGizmosSelected(); Tower'ın Range'ini görebilmek için, belirlenmiş range mesafesinde çizgi çizer.
