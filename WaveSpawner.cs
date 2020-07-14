@@ -8,7 +8,7 @@ public class WaveSpawner : MonoBehaviour
 	public WaypointDecider waypointDecider;
 
 	//Kaç düşmanın hayatta olduğunu tutacak değişken
-	public static int EnemiesAlive = 0;
+	public static int EnemiesAlive;
 
 	//Tek tek düşman çağırmaktansa, wave classında oluşturduğumuz wave'leri çağırmak daha mantıklı.
 	//Wave arrayi oluşturup her elemanını ayrı ayrı customize ettik. Bunu da burada index kullanarak çağıracağız.
@@ -28,6 +28,11 @@ public class WaveSpawner : MonoBehaviour
 	//Oyun sonu ekrani fonksoyonlarini cagirmak icin olusturduk.
 	public GameManager gameManager;
 	public Text WaveCountdownText;
+
+	void Start()
+	{
+		EnemiesAlive = 0;	
+	}
 
 	void Update()
 	{
