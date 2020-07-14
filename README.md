@@ -287,6 +287,7 @@ UI Scripts
 7.MagicTowerCostUI
 8.RoundsUI
 9.StoneTowerCostUI
+10.EnemiesAliveUI
 
       Bulukları Yerler; İlgili text UI objeleri
       Amaçları; İlgili değerleri ilgili Text konumlarında göstermek. 
