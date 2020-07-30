@@ -17,19 +17,19 @@ Here are some visuals of the game;
 ![](https://i.imgur.com/55qKw4Am.png)\
 *Tower Sprites*
 
-![](https://i.imgur.com/AUq7mscm.png)\
+![](https://i.imgur.com/AUq7mscl.png)\
 *Gameplay*
 
-![](https://i.imgur.com/mSJSHHXm.jpg)\
+![](https://i.imgur.com/mSJSHHXl.jpg)\
 *Pause Menu*
 
-![](https://i.imgur.com/60fNfcgm.png)\
+![](https://i.imgur.com/60fNfcgl.png)\
 *Info Menu*
 
-![](https://i.imgur.com/JIk8mQPm.jpg)\
+![](https://i.imgur.com/JIk8mQPl.jpg)\
 *Main Menu*
 
-![](https://i.imgur.com/qcihwyEm.jpg)\
+![](https://i.imgur.com/qcihwyEl.jpg)\
 *Stats Menu*
 
 ## Installation
