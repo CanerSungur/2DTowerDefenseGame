@@ -33,5 +33,5 @@ Here are some visuals of the game;
 *Stats Menu*
 
 ## Installation
-You can download this game from this link;
-<https://drive.google.com/drive/folders/1FJSR3dSd8voimnZkz8zQSYLuaATiyTqz?usp=sharing>
+>You can download this game from this link;\
+><https://drive.google.com/drive/folders/1FJSR3dSd8voimnZkz8zQSYLuaATiyTqz?usp=sharing>
