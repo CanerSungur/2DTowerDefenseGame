@@ -34,4 +34,4 @@ Here are some visuals of the game;
 
 ## Installation
 >You can download this game from this link;\
-><https://drive.google.com/drive/folders/1FJSR3dSd8voimnZkz8zQSYLuaATiyTqz?usp=sharing>
+><https://drive.google.com/drive/folders/129pvscA3UbN49OOxaC4UtX7yg1_q6-Ga?usp=sharing>
