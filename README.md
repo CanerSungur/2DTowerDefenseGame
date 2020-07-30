@@ -8,7 +8,7 @@ You can find all of the raw scripts and documentation of them in folders section
 Base of visuals in this game were provided from various websites and altered to put in the game.
 Here are some visuals of the game;
 
-![](https://imgur.com/Y9sjb4f)
+![](https://i.imgur.com/Y9sjb4fl.png)
 
 ## Installation
 You can download this game from this link;
